@@ -1,0 +1,14 @@
+1- Identificazione tramite carta d'identità:
+SELECT `name`, `lastname` FROM `ospiti` WHERE `document_type`= 'CI'
+
+2- Ospiti nati dopo il 1988:
+SELECT `name`, `lastname` FROM `ospiti` WHERE `date_of_birth`> 1988-12-31
+
+3- Ospiti con più di 20 anni:
+SELECT `name`, `lastname` FROM `ospiti` WHERE `date_of_birth`> NOW() -INTERVAL 30 YEAR
+
+4- Ospiti il cui nome inizia per D:
+SELECT * FROM `ospiti` WHERE `name`LIKE 'D%'
+
+5-Incassato degli ordini accepted:
+SELECT SUM(`price`) AS 'tot' FROM `pagamenti` WHERE `status` = 'accepted'
