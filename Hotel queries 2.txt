@@ -1,0 +1,11 @@
+1- Come si chiamano gli ospiti che hanno fatto più di due prenotazioni:
+SELECT COUNT(`ospiti`.`id`) AS `total_bookings`,`ospiti`.`name`, `ospiti`.`lastname` FROM `ospiti` INNER JOIN `prenotazioni_has_ospiti` ON `ospiti`.`id`=`prenotazioni_has_ospiti`.`ospite_id` GROUP BY `ospiti`.`id`
+
+2- Stampare tutti gli ospiti per ogni prenotazione:
+SELECT prenotazioni_has_ospiti.id,name, lastname FROM `prenotazioni_has_ospiti` INNER JOIN `ospiti` ON `ospiti`.`id`= `prenotazioni_has_ospiti`.`ospite_id` ORDER BY `prenotazioni_has_ospiti`.id
+
+3- Stampare nome, cognome, prezzo e pagante prenotazioni maggio 2018:
+SELECT paganti.name,paganti.lastname, pagamenti.price, pagamenti.pagante_id FROM `prenotazioni` INNER JOIN `pagamenti` ON `prenotazioni`.`id`= `pagamenti`.`prenotazione_id` INNER JOIN `paganti` ON `pagamenti`.`pagante_id`= `paganti`.`id` WHERE `prenotazioni`.`created_at` BETWEEN '2018-05-01 00:00:00' AND '2018-12-31 23:59:59'
+
+4-Somma dei prezzi delle prenotazioni per le stanze del primo piano:
+ SELECT SUM(pagamenti.price) FROM `prenotazioni` INNER JOIN `prenotazioni_has_ospiti` ON `prenotazioni`.`id`= `prenotazioni_has_ospiti`.`prenotazione_id` INNER JOIN `pagamenti` ON `prenotazioni`.`id`=`pagamenti`.`prenotazione_id` INNER JOIN `stanze` ON `stanze`.id = `prenotazioni`.`stanza_id`
